@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Retailer Available Items</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .item-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .item-row input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        .item-row span {
+            width: 160px;
+            display: inline-block;
+        }
+
+        .item-row input[type="number"] {
+            width: 70px;
+        }
+
+        .section-title {
+            margin-top: 20px;
+            font-size: 22px;
+            font-weight: bold;
+            border-bottom: 2px solid #444;
+            padding-bottom: 5px;
+        }
+
+        .container {
+            width: 450px;
+            margin: auto;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Retailer – Available Store Items</h1>
+
+    <form action="form.html?role=Retailer" method="GET">
+
+        <div class="itemList">
+
+            <div class="item-row">
+                <input type="checkbox" name="item" value="Rice">
+                <span>Rice</span>
+                <input type="number" min="0" placeholder="Units">
+            </div>
+
+            <div class="item-row">
+                <input type="checkbox" name="item" value="Wheat Flour">
+                <span>Wheat Flour</span>
+                <input type="number" min="0" placeholder="Units">
+            </div>
+
+            <div class="item-row">
+                <input type="checkbox" name="item" value="Sugar">
+                <span>Sugar</span>
+                <input type="number" min="0" placeholder="Units">
+            </div>
+
+            <div class="item-row">
+                <input type="checkbox" name="item" value="Salt">
+                <span>Salt</span>
+                <input type="number" min="0" placeholder="Units">
+            </div>
+
+            <div class="item-row">
+                <input type="checkbox" name="item" value="Tea Powder">
+                <span>Tea Powder</span>
+                <input type="number" min="0" placeholder="Units">
+            </div>
+
+            <div class="item-row">
+                <input type="checkbox" name="item" value="Coffee Powder">
+                <span>Coffee Powder</span>
+                <input type="number" min="0" placeholder="Units">
+            </div>
+
+            <div class="item-row">
+                <input type="checkbox" name="item" value="Biscuit Packets">
+                <span>Biscuit Packets</span>
+                <input type="number" min="0" placeholder="Units">
+            </div>
+
+            <div class="item-row">
+                <input type="checkbox" name="item" value="Chips">
+                <span>Chips</span>
+                <input type="number" min="0" placeholder="Units">
+            </div>
+
+            <div class="item-row">
+                <input type="checkbox" name="item" value="Soft Drinks">
+                <span>Soft Drinks</span>
+                <input type="number" min="0" placeholder="Units">
+            </div>
+
+            <div class="item-row">
+                <input type="checkbox" name="item" value="Cooking Oil">
+                <span>Cooking Oil</span>
+                <input type="number" min="0" placeholder="Litres">
+            </div>
+
+            <div class="item-row">
+                <input type="checkbox" name="item" value="Shampoo">
+                <span>Shampoo</span>
+                <input type="number" min="0" placeholder="Units">
+            </div>
+
+            <div class="item-row">
+                <input type="checkbox" name="item" value="Soap">
+                <span>Soap</span>
+                <input type="number" min="0" placeholder="Units">
+            </div>
+
+            <div class="item-row">
+                <input type="checkbox" name="item" value="Detergent">
+                <span>Detergent</span>
+                <input type="number" min="0" placeholder="Units">
+            </div>
+
+            <div class="item-row">
+                <input type="checkbox" name="item" value="Bread">
+                <span>Bread</span>
+                <input type="number" min="0" placeholder="Units">
+            </div>
+
+            <div class="item-row">
+                <input type="checkbox" name="item" value="Eggs">
+                <span>Eggs</span>
+                <input type="number" min="0" placeholder="Units">
+            </div>
+
+        </div>
+
+        <br><br>
+        <button type="submit">Next</button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wholesaler Stock</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .item-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .item-row input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        .item-row span {
+            width: 200px; /* item name width */
+            display: inline-block;
+        }
+
+        .item-row input[type="number"] {
+            width: 100px;
+        }
+
+        .section-title {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            border-bottom: 2px solid #333;
+            padding-bottom: 5px;
+        }
+
+        .container {
+            width: 450px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+        <!-- STOCK SECTION -->
+        <div class="section-title">Enter Available Stock</div>
+
+        <div class="item-row">
+            <input type="checkbox" name="item[]" value="Rice">
+            <span>Rice</span>
+            <input type="number" min="0" placeholder="Qty (kg)">
+        </div>
+
+        <div class="item-row">
+            <input type="checkbox" name="item[]" value="Wheat Flour">
+            <span>Wheat Flour</span>
+            <input type="number" min="0" placeholder="Qty (kg)">
+        </div>
+
+        <div class="item-row">
+            <input type="checkbox" name="item[]" value="Sugar">
+            <span>Sugar</span>
+            <input type="number" min="0" placeholder="Qty (kg)">
+        </div>
+
+        <div class="item-row">
+            <input type="checkbox" name="item[]" value="Cooking Oil">
+            <span>Cooking Oil</span>
+            <input type="number" min="0" placeholder="Litres">
+        </div>
+
+        <div class="item-row">
+            <input type="checkbox" name="item[]" value="Shampoo Bottles">
+            <span>Shampoo Bottles</span>
+            <input type="number" min="0" placeholder="Units">
+        </div>
+
+        <div class="item-row">
+            <input type="checkbox" name="item[]" value="Soap Bars">
+            <span>Soap Bars</span>
+            <input type="number" min="0" placeholder="Units">
+        </div>
+
+        <div class="item-row">
+            <input type="checkbox" name="item[]" value="Biscuit Packs">
+            <span>Biscuit Packs</span>
+            <input type="number" min="0" placeholder="Units">
+        </div>
+
+        <div class="item-row">
+            <input type="checkbox" name="item[]" value="Soft Drink Crates">
+            <span>Soft Drink Crates</span>
+            <input type="number" min="0" placeholder="Crates">
+        </div>
+        <div class="item-row">
+            <input type="checkbox" name="item[]" value="Pulses">
+            <span>Pulses</span>
+            <input type="number" min="0" placeholder="Qty (kg)">
+        </div>
+        <div class="item-row">
+            <input type="checkbox" name="item[]" value="Milk">
+            <span>Milk</span>
+            <input type="number" min="0" placeholder="Litres">
+        </div>
+
+        <br>
+        <button type="submit">Next</button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

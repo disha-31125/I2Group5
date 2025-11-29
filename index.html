@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Select Login Type</h1>
+
+        <div class="btn-group">
+            <button onclick="goToPage('Wholesaler')">Wholesaler</button>
+            <button onclick="goToPage('Retailer')">Retailer</button>
+            <button onclick="goToPage('Customer')">Customer</button>
+        </div>
+    </div>
+
+    <script>
+        function goToPage(role) {
+            // Send user to ONE login page with the selected role
+            window.location.href = "form.html?role=" + role;
+        }
+    </script>
+
+</body>
+</html>
+

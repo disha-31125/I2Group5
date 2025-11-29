@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Items</title>
+    <link rel="stylesheet" href="style.css">
+<style>
+    /* Main container alignment */
+    .container {
+        width: 100%;
+        max-width: 600px;
+        margin: auto;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    /* Items list should be vertical */
+    #itemsList {
+        display: flex;
+        flex-direction: column;
+        gap: 8px; /* space between rows */
+    }
+
+    /* Each row = checkbox + name + qty */
+    .item-row {
+        display: flex;
+        align-items: center;
+        background: #f7f7f7;
+        padding: 8px;
+        border-radius: 5px;
+        gap: 10px;
+    }
+
+    /* Checkbox always close to name */
+    .item-row input[type="checkbox"] {
+        margin-right: 5px;
+        transform: scale(1.2); /* slightly bigger */
+    }
+
+    /* Item name */
+    .item-row span {
+        flex: 1;
+        font-size: 16px;
+    }
+
+    /* Quantity input */
+    .item-row input[type="number"] {
+        width: 80px;
+        padding: 5px;
+        font-size: 14px;
+    }
+
+    /* Cart section */
+    #cart {
+        margin-top: 20px;
+        padding: 10px;
+        border: 2px solid #444;
+        border-radius: 5px;
+        background: #f9f9f9;
+    }
+
+    .cart-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 6px 0;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .cart-item button {
+        background-color: red;
+        color: white;
+        border: none;
+        padding: 3px 8px;
+        cursor: pointer;
+        border-radius: 3px;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Customer Shopping List</h1>
+
+    <!-- ITEMS LIST -->
+    <div id="itemsList">
+
+        <div class="item-row">
+            <input type="checkbox" value="Rice">
+            <span>Rice</span>
+            <input type="number" min="1" placeholder="kg">
+        </div>
+
+        <div class="item-row">
+            <input type="checkbox" value="Wheat Flour">
+            <span>Wheat Flour</span>
+            <input type="number" min="1" placeholder="kg">
+        </div>
+
+        <div class="item-row">
+            <input type="checkbox" value="Sugar">
+            <span>Sugar</span>
+            <input type="number" min="1" placeholder="kg">
+        </div>
+
+        <div class="item-row">
+            <input type="checkbox" value="Salt">
+            <span>Salt</span>
+            <input type="number" min="1" placeholder="kg">
+        </div>
+
+        <div class="item-row">
+            <input type="checkbox" value="Tea Powder">
+            <span>Tea Powder</span>
+            <input type="number" min="1" placeholder="kg">
+        </div>
+
+        <div class="item-row">
+            <input type="checkbox" value="Coffee Powder">
+            <span>Coffee Powder</span>
+            <input type="number" min="1" placeholder="kg">
+        </div>
+
+        <div class="item-row">
+            <input type="checkbox" value="Chips">
+            <span>Chips</span>
+            <input type="number" min="1" placeholder="Units">
+        </div>
+
+        <div class="item-row">
+            <input type="checkbox" value="Soft Drinks">
+            <span>Soft Drinks</span>
+            <input type="number" min="1" placeholder="Units">
+        </div>
+
+    </div>
+
+    <button id="addToCart">Add to Cart</button>
+
+    <!-- CART SECTION -->
+    <div id="cart">
+        <h3>Your Cart</h3>
+        <div id="cartItems"></div>
+    </div>
+
+    <br>
+    <button onclick="goToForm()">Next</button>
+
+</div>
+
+
+<script>
+    let cart = JSON.parse(localStorage.getItem("cartItems")) || {};
+function updateCartDisplay() {
+    const container = document.getElementById("cartItems");
+    container.innerHTML = "";
+
+    for (let item in cart) {
+        const row = document.createElement("div");
+        row.classList.add("cart-item");
+
+        row.innerHTML = `
+            <span>${item}: ${cart[item]} units</span>
+            <button onclick="removeItem('${item}')">Delete</button>
+        `;
+
+        container.appendChild(row);
+    }
+
+    localStorage.setItem("cartItems", JSON.stringify(cart));
+}
+
+    function removeItem(item) {
+        delete cart[item];
+        updateCartDisplay();
+    }
+
+    document.getElementById("addToCart").addEventListener("click", () => {
+        const rows = document.querySelectorAll(".item-row");
+
+        rows.forEach(row => {
+            const checkbox = row.querySelector("input[type='checkbox']");
+            const qty = row.querySelector("input[type='number']");
+
+            if (checkbox.checked && qty.value.trim() !== "") {
+                cart[checkbox.value] = qty.value;
+            }
+        });
+
+        updateCartDisplay();
+    });
+
+    function goToForm() {
+        window.location.href = "form.html?role=Customer";
+    }
+
+    updateCartDisplay();
+</script>
+
+</body>
+</html>
