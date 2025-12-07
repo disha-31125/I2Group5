@@ -79,6 +79,8 @@
 <body>
 
 <div class="container">
+    <div id="itemsContainer"></div>
+
 
     <h1>Customer Shopping List</h1>
 
@@ -195,6 +197,32 @@ function updateCartDisplay() {
     }
 
     updateCartDisplay();
+</script>
+
+
+
+
+
+<script>
+    // STEP 1 – Fetch the items from backend
+    fetch("http://localhost:5000/api/items")
+        .then(res => res.json())
+        .then(items => {
+            let container = document.getElementById("itemsContainer");
+
+            // STEP 2 – Show items dynamically
+            items.forEach(item => {
+                container.innerHTML += `
+                    <div class="item">
+                        <label>${item.name}:</label>
+                        <input type="number" id="${item.name}_qty" placeholder="Enter amount">
+                        <select id="${item.name}_unit">
+                            <option value="${item.defaultUnit}">${item.defaultUnit}</option>
+                        </select>
+                    </div>
+                `;
+            });
+        });
 </script>
 
 </body>

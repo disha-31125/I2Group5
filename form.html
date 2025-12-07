@@ -1,66 +1,132 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Information Form</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="container">
-    <h1 id="roleTitle"></h1>
+    <!-- Title with role -->
+    <h1 id="roleTitle">Information</h1>
 
-    <form id="userForm">
-        <label>Name:</label>
-        <input type="text" id="name" required>
+    <!-- Selected items preview -->
+    <div id="cartDetails" style="text-align:left; margin-bottom:20px; display:none;">
+        <h3>Selected Items:</h3>
+        <ul id="cartList"></ul>
+    </div>
 
-        <label>Email:</label>
-        <input type="email" id="email" required>
+    <!-- User information form -->
+    <form id="infoForm" onsubmit="handleFormSubmit(event)">
+        <label for="name">Name:</label>
+        <input id="name" type="text" required>
 
-        <label>Mobile Number:</label>
-        <input type="tel" id="mobile" required>
+        <label for="email">Email:</label>
+        <input id="email" type="email" required>
 
-        <label>Address:</label>
+        <label for="phone">Mobile Number:</label>
+        <input id="phone" type="tel" required>
+
+        <label for="address">Address:</label>
         <textarea id="address" required></textarea>
 
-        <button type="submit">Next</button>
+        <button type="submit">Submit Order</button>
     </form>
 </div>
 
-<!-- Read Role -->
+<!-- SCRIPT 1: Get role from URL -->
 <script>
     const params = new URLSearchParams(window.location.search);
-    const role = params.get("role");
+    const role = params.get("role") || "User";
+    document.getElementById("roleTitle").textContent = role + " Information";
+</script>
 
-    if (role) {
-        document.getElementById("roleTitle").textContent = role + " Login";
+<!-- SCRIPT 2: Load cart from localStorage and show it -->
+<script>
+    // This will hold structured items we send to backend
+    let orderItems = [];
+
+    const rawCart = JSON.parse(localStorage.getItem("cartItems") || "null");
+    const cartListEl = document.getElementById("cartList");
+    const cartDetailsEl = document.getElementById("cartDetails");
+
+    if (rawCart) {
+        cartDetailsEl.style.display = "block";
+
+        for (let key in rawCart) {
+            if (!rawCart.hasOwnProperty(key)) continue;
+
+            const value = (rawCart[key] || "").trim();
+            if (!value) continue; // skip empty
+
+            // value looks like "2 kg" or "1.5 litres"
+            const parts = value.split(" ");
+            const quantity = parseFloat(parts[0]);
+            const unit = parts.slice(1).join(" ");
+
+            // Add to UI list
+            const li = document.createElement("li");
+            li.textContent = key + ": " + value;
+            cartListEl.appendChild(li);
+
+            // Add to array for backend
+            if (!isNaN(quantity)) {
+                orderItems.push({
+                    name: key,
+                    quantity: quantity,
+                    unit: unit
+                });
+            }
+        }
     }
 </script>
 
-<!-- Submit Handler -->
+<!-- SCRIPT 3: Submit order + user details to backend -->
 <script>
-    document.getElementById("userForm").addEventListener("submit", function(event) {
-        event.preventDefault();
+    function handleFormSubmit(event) {
+        event.preventDefault(); // stop normal form submit / page reload
 
-        // Save login details
-        const userInfo = {
-            name: document.getElementById("name").value,
-            email: document.getElementById("email").value,
-            mobile: document.getElementById("mobile").value,
-            address: document.getElementById("address").value
-        };
-        localStorage.setItem("userInfo", JSON.stringify(userInfo));
+        const name    = document.getElementById("name").value.trim();
+        const email   = document.getElementById("email").value.trim();
+        const phone   = document.getElementById("phone").value.trim();
+        const address = document.getElementById("address").value.trim();
 
-        // Redirect based on role
-        if (role === "Retailer") {
-            window.location.href = "retailers_items.html";
-        } 
-        else if (role === "Wholesaler") {
-            window.location.href = "wholesalers_items.html";
-        } 
-        else if (role === "Customer") {
-            window.location.href = "items.html";  // THIS IS WHAT YOU WANTED
+        if (orderItems.length === 0) {
+            alert("No items selected in cart.");
+            return;
         }
-    });
+
+        const order = {
+            role: role,
+            customer: {
+                name,
+                email,
+                phone,
+                address
+            },
+            items: orderItems
+        };
+
+        fetch("http://localhost:5000/api/orders", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(order)
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log("Order response from backend:", data);
+            alert("Order submitted successfully!");
+
+            // Optionally clear cart + form
+            localStorage.removeItem("cartItems");
+            document.getElementById("infoForm").reset();
+        })
+        .catch(err => {
+            console.error("Error sending order:", err);
+            alert("Something went wrong while submitting order.");
+        });
+    }
 </script>
 
 </body>

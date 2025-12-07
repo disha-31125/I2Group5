@@ -1,0 +1,37 @@
+project/
+├─ frontend/         # your existing frontend (from GitHub)
+└─ backend/          # new backend we will create
+   ├─ models/
+   │   ├─ User.js
+   │   ├─ Item.js
+   │   └─ Order.js
+   ├─ routes/
+   │   ├─ auth.js
+   │   ├─ items.js
+   │   └─ orders.js
+   ├─ seed/
+   │   └─ seedItems.js
+   ├─ .env
+   ├─ server.js
+   └─ package.json
+   {
+  "name": "project-backend",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
+
