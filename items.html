@@ -76,6 +76,7 @@
 </style>
 </head>
 
+
 <body>
 
 <div class="container">
@@ -152,6 +153,9 @@
 
 
 <script>
+
+    const BASE_URL = "https://storeconnect-asb4.onrender.com";
+
     let cart = JSON.parse(localStorage.getItem("cartItems")) || {};
 function updateCartDisplay() {
     const container = document.getElementById("cartItems");
@@ -205,7 +209,8 @@ function updateCartDisplay() {
 
 <script>
     // STEP 1 – Fetch the items from backend
-    fetch("http://localhost:5000/api/items")
+    fetch(`${BASE_URL}/api/items`)
+
         .then(res => res.json())
         .then(items => {
             let container = document.getElementById("itemsContainer");
@@ -224,6 +229,5 @@ function updateCartDisplay() {
             });
         });
 </script>
-
 </body>
 </html>

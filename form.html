@@ -108,11 +108,12 @@
             items: orderItems
         };
 
-        fetch("http://localhost:5000/api/orders", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(order)
-        })
+        fetch(`${BASE_URL}/api/orders`, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(order)
+})
+
         .then(res => res.json())
         .then(data => {
             console.log("Order response from backend:", data);
