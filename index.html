@@ -1,29 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Login Page</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <title>Select Role — StoreConnect</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    /* small inline style so it looks okay if your style.css isn't loaded */
+    body { font-family: Arial, sans-serif; display:flex; align-items:center; justify-content:center; height:100vh; background:#f2f4f7; margin:0; }
+    .card { background:#fff; padding:28px; border-radius:8px; box-shadow:0 6px 20px rgba(0,0,0,0.08); width:320px; text-align:center; }
+    .btn { display:block; width:100%; margin:10px 0; padding:10px; border-radius:6px; border:none; cursor:pointer; font-size:16px; }
+    .btn.wh { background:#007bff; color:#fff; }
+    .btn.ret { background:#28a745; color:#fff; }
+    .btn.cus { background:#17a2b8; color:#fff; }
+  </style>
 </head>
-
 <body>
+  <div class="card">
+    <h2>Select Login Type</h2>
 
-    <div class="container">
-        <h1>Select Login Type</h1>
+    <!-- Buttons call goToPage(role) -->
+    <button class="btn wh" onclick="goToPage('Wholesaler')">Wholesaler</button>
+    <button class="btn ret" onclick="goToPage('Retailer')">Retailer</button>
+    <button class="btn cus" onclick="goToPage('Customer')">Customer</button>
+  </div>
 
-        <div class="btn-group">
-            <button onclick="goToPage('Wholesaler')">Wholesaler</button>
-            <button onclick="goToPage('Retailer')">Retailer</button>
-            <button onclick="goToPage('Customer')">Customer</button>
-        </div>
-    </div>
+  <script>
+    // Redirect user to the correct page based on role
+    function goToPage(role) {
+      if (!role) {
+        alert('Please select a role');
+        return;
+      }
 
-    <script>
-        function goToPage(role) {
-            // Send user to ONE login page with the selected role
-            window.location.href = "form.html?role=" + role;
-        }
-    </script>
+      // For wholesaler, open wholesalers_items page
+      if (role === 'Wholesaler') {
+        window.location.href = 'wholesalers_items.html?role=' + encodeURIComponent(role);
+        return;
+      }
 
+      // For Customer and Retailer, open items page first
+      window.location.href = 'items.html?role=' + encodeURIComponent(role);
+    }
+
+    // DEBUG helper (optional) — remove if you like
+    // console.log('Index loaded');
+  </script>
 </body>
 </html>
-
